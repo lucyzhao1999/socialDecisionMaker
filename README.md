@@ -1,5 +1,7 @@
 A computational model of human morality and fairness using first-principle Bayesian statistics
 
+UCLA Visual Intelligence Lab, advised by Dr. Tao Gao http://www.stat.ucla.edu/~taogao/
+
 Humans are sensitive to social judgements.  
 Our choices in allocating resources are influenced by how we believe others will perceive our behavior, which can be seen as an introspective theory of mind.   
 
