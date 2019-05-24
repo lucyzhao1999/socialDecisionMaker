@@ -1,18 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import math
 import matplotlib.pyplot as plt
 
 
-# # Base Decision Class
-
-# In[2]:
-
+#Base Decision Class
 
 class BaseDecisionMaker:
     def __init__(self, rewardDictionary, meritVector, beta, numberOfAgents):
@@ -22,32 +13,14 @@ class BaseDecisionMaker:
         self.numberOfAgents = numberOfAgents
         
     def __call__(self, alphaVector):
-        expectedReward = self.getExpectedRewardForDecisionMaker()
-        utilityOfEfficiency = self.getUtilityOfEfficiency(expectedReward, alphaVector[0])
-        utilityOfInequity = self.getUtilityOfInequity(expectedReward, alphaVector[1])
+        utilityOfEfficiency = self.getUtilityOfEfficiency(alphaVector[0])
+        utilityOfInequity = self.getUtilityOfInequity(self.rewardDictionary, alphaVector[1])
         baseUtility = self.getBaseDecisionUtility(utilityOfEfficiency, utilityOfInequity)  
-        return(baseUtility)
+        return baseUtility
         
-    def getExpectedRewardForDecisionMaker(self):  # verb for function names
-        dic = dict()  # name of variables
-        for action in self.rewardDictionary.keys():
-            expectedReward = [0] * self.numberOfAgents
-            for rewardScheme in self.rewardDictionary[action].keys():
-                probability = self.rewardDictionary[action][rewardScheme]
-                for i in range(0, len(rewardScheme)):
-                    expectedReward[i] = expectedReward[i] + probability * rewardScheme[i]
-            dic[action] = expectedReward
-        return dic
-    
-    def getUtilityOfEfficiency(self, expectedReward, agentWeights): 
-        dic = dict()
-        actions = list(self.rewardDictionary.keys()) 
-        for i in range(0, len(actions)):
-            rewardForActioni = expectedReward[actions[i]]
-            totalReward = sum([agentWeights[k] * rewardForActioni[k] for k in
-                               range(0, len(agentWeights))])
-            dic[actions[i]] = totalReward
-        return dic 
+    def getUtilityOfEfficiency(self, agentWeights): 
+        utilityOfEfficiencyDict = {action: sum([reward*weight for reward, weight in zip(self.rewardDictionary[action], agentWeights)]) for action in self.rewardDictionary.keys()}
+        return utilityOfEfficiencyDict
     
     def getInequityForAction(self, reward):
         inequitySum = 0
@@ -57,7 +30,7 @@ class BaseDecisionMaker:
         return inequitySum
     
     def getUtilityOfInequity(self, expectedReward, weightForInequity):
-        actions = list(self.rewardDictionary.keys())  # ['A', 'B', 'C']
+        actions = list(self.rewardDictionary.keys())
         totalInequity = [self.getInequityForAction(expectedReward[action]) for action in actions]
         weightedTotalInequityDic = {actions[i]: totalInequity[i] * weightForInequity for i in range(0, len(actions))}
         return (weightedTotalInequityDic) 
@@ -68,19 +41,30 @@ class BaseDecisionMaker:
         return baseDecisionUtilitydic 
     
     
-
 def getActionProbabilityGivenAlpha(baseUtility, beta):
     weightedUtility = {action: math.exp(baseUtility[action] * beta) for action in baseUtility.keys()}
     sumOfWeightedUtility = sum([weightedUtility[action] for action in baseUtility.keys()])
     expDistribution = {action: weightedUtility[action] / sumOfWeightedUtility for action in baseUtility.keys()}
-    
     return expDistribution
 
+def getBaseUtilityDic(getActionExpectedUtilityGivenWeight, weightImpartial, alphaAIList):
+    baseUtilityDict = [[getUtilityFunc([weightImpartial, alphaAI]) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAI in alphaAIList]
+    return baseUtilityDict
+ 
+def getFullActionProb(getActionProbabilityGivenAlpha, baseUtilityDict, alphaAIList):
+    fullActionProb = [[getActionProbabilityGivenAlpha (utility, beta) for utility in baseUtilityDict[i]] for i in range(len(alphaAIList))]
+    return fullActionProb
 
-# # Part 2 Judge
+def getBaseActionProb_Action(fullActionProb,alphaAIList, targetAction):
+    actionProb = [[fullActionProb[alphaAICase][index][targetAction] for index in range(len(fullActionProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
+    return actionProb
 
-# In[3]:
+def summarizeProb(probabilityList, alphaAIList, equalBonus):
+    prob_Summarized = [sum([sublist[i] for sublist in probabilityList]) / len(alphaAIList) for i in range(len(equalBonus))]
+    return prob_Summarized
 
+
+#Part 2 Judge
 
 def createTupleWithAlpha(alphaPartial, numberOfAgents, partialAgent):
     value = [alphaPartial] * numberOfAgents
@@ -156,93 +140,81 @@ class JudgePartiality:
                                                                             sumOfProbOfPartialGivenAction, sumOfProb)}
         return probOfPartialGivenAction
 
+def getProbOfPartial_total(getJudgePartiality, getActionExpectedUtilityGivenWeight, alphaAIList):
+    probOfPartial_total = [[getJudgePartiality[alphaAICase](getUtilityFunc) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAICase in range(len(alphaAIList))] 
+    return probOfPartial_total
+
+def getProbOfPartial_Action(probOfPartial_total, alphaAIList, targetAction):
+    probOfPartial_Action = [[probOfPartial_total[alphaAICase][index][targetAction] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
+    return probOfPartial_Action
 
 
-# # Part3: Constructed Social Utility
-
-# In[4]:
-
+#Part3: Constructed Social Utility
 
 def getConstructedUtility(alphaAI, probOfPartial, alphaPA, baseUtility):
     constructedUtilityDict = {action: baseUtility[action] - alphaPA * probOfPartial[action] for action in probOfPartial.keys()}
     return constructedUtilityDict
 
+def getFullConstructedProb(getConstructedUtility, getActionProbabilityGivenAlpha, alphaAIList, alphaPA, probOfPartial_total, baseUtilityDict):
+    constructUtility = [[getConstructedUtility (alphaAIList[alphaAICase], probOfPartial, alphaPA, utiDict) for probOfPartial, utiDict in zip(probOfPartial_total[alphaAICase], baseUtilityDict[alphaAICase])] for alphaAICase in range(len(alphaAIList))]
+    fullConstructedProb = [[getActionProbabilityGivenAlpha (constUtility, beta) for constUtility in constructUtility[alphaAICase]] for alphaAICase in range(len(alphaAIList))]
+    return fullConstructedProb
 
-# In[5]:
+def getConstructedProb_Action(fullConstructedProb, alphaAIList, targetAction):
+    constructedProb_Action = [[fullConstructedProb[alphaAICase][index][targetAction] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
+    return constructedProb_Action
 
-
-# helper function
-def createProbDicList(highBonus, lowBonus, equalBonusList):
-    dic = [{ "Action1": {(highBonus, lowBonus): 1}, "Action2": {(lowBonus, highBonus): 1}, "Action3": {(bonus, bonus): 1}} for bonus in equalBonusList]
-    return dic
+def createProbDicList(highBonus, lowBonus, equalBonusList, agentsCount):    
+    allocationList = [[lowBonus]* index + [highBonus] + [lowBonus] * (agentsCount - 1 - index) for index in range(0, agentsCount)]
+    biasDict = {"Action"+ str(index+1): allocation for index, allocation in zip(range(0, agentsCount), allocationList)}
+    dicList = list()
+    for index in range(0, len(equalBonusList)):
+        copyDict = {}
+        copyDict.update(biasDict)
+        copyDict["ActionEqual"] =  [equalBonusList[index]] * agentsCount
+        dicList.append(copyDict)
+        del copyDict
+    return dicList
 
 
 # # Experiment
 
-# In[6]:
-
-
 lambdaInput = 0.7
-alphaAIList = [np.random.exponential(lambdaInput) for i in range(10000)]
-
-
-# In[7]:
-
-
+alphaAIList = [np.random.exponential(lambdaInput) for i in range(10000)] # draw 10000 samples from exponential distribution
 absoluteEffort = 1
-# alphaAI = 0.7 # mean of the exponential function, generate in prior with np.random.exponential(.7)
-
-
-# In[8]:
-
-
-numberOfAgents = 2
 beta = 0.003
 alphaPartial = 6
 alphaPA = 1350
 judgePrior = 0.5
+
+numberOfAgents = 2
 effort = [absoluteEffort, absoluteEffort]
-
 equalBonus = np.linspace(0,1200, 50)
-#equalBonus = [0, 200, 400, 600, 800, 1000, 1200]
-
-
-probDicList = createProbDicList(1000, 100, equalBonus)
-
-getActionExpectedUtilityGivenWeight = [BaseDecisionMaker(probabDict, effort, beta, numberOfAgents) 
-                                       for probabDict in probDicList]
+probDicList = createProbDicList(1000, 100, equalBonus, numberOfAgents)
+getActionExpectedUtilityGivenWeight = [BaseDecisionMaker(probabDict, effort, beta, numberOfAgents) for probabDict in probDicList]
+weightImpartial = [1, 1]
 
 
 # ## Result of Figure 1-d, base decision maker P(equal bonus)
 
-# In[9]:
+baseUtilityDict = getBaseUtilityDic(getActionExpectedUtilityGivenWeight, weightImpartial, alphaAIList)
+fullActionProb = getFullActionProb(getActionProbabilityGivenAlpha, baseUtilityDict, alphaAIList)
+equalBonusProb = getBaseActionProb_Action(fullActionProb,alphaAIList, "ActionEqual")
 
-
-weightImpartial = [1, 1]
-
-baseUtilityDict = [[getUtilityFunc([weightImpartial, alphaAI]) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAI in alphaAIList]
-fullActionProb = [[getActionProbabilityGivenAlpha (utility, beta) for utility in baseUtilityDict[i]] for i in range(len(alphaAIList))]
-equalBonusProb = [[fullActionProb[alphaAICase][index]["Action3"] for index in range(len(fullActionProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-
-
-equalBonusProb_Summarized = [sum([sublist[i] for sublist in equalBonusProb]) / len(alphaAIList) for i in range(len(equalBonus))]
+equalBonusProb_Summarized = summarizeProb(equalBonusProb, alphaAIList, equalBonus)
 
 
 # # Result of Figure 1-d, partiality
 
-# In[10]:
-
-
 getJudgePartiality = [JudgePartiality (alphaPartial, numberOfAgents, alphaAI, beta, judgePrior) for alphaAI in alphaAIList]
 
-probOfPartial_total = [[getJudgePartiality[alphaAICase](getUtilityFunc) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAICase in range(len(alphaAIList))] 
+probOfPartial_total = getProbOfPartial_total(getJudgePartiality, getActionExpectedUtilityGivenWeight, alphaAIList)
 
-probOfPartial_unequalBonus = [[probOfPartial_total[alphaAICase][index]["Action1"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
-probOfPartial_equalBonus = [[probOfPartial_total[alphaAICase][index]["Action3"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
+probOfPartial_unequalBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "Action1")
+probOfPartial_equalBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "ActionEqual")
 
-probOfPartial_unequalBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_unequalBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
-probOfPartial_equalBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_equalBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
-
+probOfPartial_unequalBonus_Summarized = summarizeProb(probOfPartial_unequalBonus, alphaAIList, equalBonus)
+probOfPartial_equalBonus_Summarized = summarizeProb(probOfPartial_equalBonus, alphaAIList, equalBonus)
 
 plt.plot(equalBonus, probOfPartial_unequalBonus_Summarized, color='grey', label = 'Unequal Allocation')
 plt.plot(equalBonus, probOfPartial_equalBonus_Summarized, color='blue', label = 'Equal Allocation')
@@ -255,18 +227,11 @@ plt.show()
 
 # # Result of Figure 1-d, Constructed Social Utility
 
-# ### AlphaVector = [1,1]
 
-# In[11]:
+fullConstructedProb = getFullConstructedProb(getConstructedUtility, getActionProbabilityGivenAlpha, alphaAIList, alphaPA, probOfPartial_total, baseUtilityDict)
 
-
-constructUtility = [[getConstructedUtility (alphaAIList[alphaAICase], probOfPartial, alphaPA, utiDict) for probOfPartial, utiDict in zip(probOfPartial_total[alphaAICase], baseUtilityDict[alphaAICase])] for alphaAICase in range(len(alphaAIList))]
-
-fullConstructedProb = [[getActionProbabilityGivenAlpha (constUtility, beta) for constUtility in constructUtility[alphaAICase]] for alphaAICase in range(len(alphaAIList))]
-
-equalBonusConstructedProb = [[fullConstructedProb[alphaAICase][index]["Action3"] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-equalBonusConstructedProb_Summarized = [sum([sublist[i] for sublist in equalBonusConstructedProb]) / len(alphaAIList) for i in range(len(equalBonus))]
-
+equalBonusConstructedProb = getConstructedProb_Action(fullConstructedProb, alphaAIList, "ActionEqual")
+equalBonusConstructedProb_Summarized = summarizeProb(equalBonusConstructedProb, alphaAIList, equalBonus)
 
 plt.plot(equalBonus, equalBonusProb_Summarized, color='blue', label = 'Base')
 plt.plot(equalBonus, equalBonusConstructedProb_Summarized, color='grey', label = 'Constructed')
@@ -279,9 +244,6 @@ plt.show()
 
 # # Figure2: 
 
-# In[12]:
-
-
 numberOfAgents = 2
 beta = 0.003
 alphaPartial = 6
@@ -292,41 +254,34 @@ effort = [absoluteEffort, absoluteEffort]
 equalBonus = [0, 100, 500, 1000, 1100]
 weightImpartial = [1, 1]
 
-probDicList = createProbDicList(1000, 100, equalBonus)
+probDicList = createProbDicList(1000, 100, equalBonus, numberOfAgents)
 getActionExpectedUtilityGivenWeight = [BaseDecisionMaker(probabDict, effort, beta, numberOfAgents) for probabDict in probDicList]
 
 
-# In[13]:
-
-
 weightImpartial = [1, 1]
-baseUtilityDict = [[getUtilityFunc([weightImpartial, alphaAI]) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAI in alphaAIList]
+baseUtilityDict = getBaseUtilityDic(getActionExpectedUtilityGivenWeight, weightImpartial, alphaAIList)
+
 
 # partiality
 getJudgePartiality = [JudgePartiality (alphaPartial, numberOfAgents, alphaAI, beta, judgePrior) for alphaAI in alphaAIList]
-probOfPartial_total = [[getJudgePartiality[alphaAICase](getUtilityFunc) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAICase in range(len(alphaAIList))] 
+probOfPartial_total = getProbOfPartial_total(getJudgePartiality, getActionExpectedUtilityGivenWeight, alphaAIList)
 
-probOfPartial_unequalBonus = [[probOfPartial_total[alphaAICase][index]["Action1"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
-probOfPartial_equalBonus = [[probOfPartial_total[alphaAICase][index]["Action3"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
+probOfPartial_unequalBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "Action1")
+probOfPartial_equalBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "ActionEqual")
 
-probOfPartial_unequalBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_unequalBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
-probOfPartial_equalBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_equalBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
+probOfPartial_unequalBonus_Summarized = summarizeProb(probOfPartial_unequalBonus, alphaAIList, equalBonus)
+probOfPartial_equalBonus_Summarized = summarizeProb(probOfPartial_equalBonus, alphaAIList, equalBonus)
+
 
 #constructed
-constructUtility = [[getConstructedUtility (alphaAIList[alphaAICase], probOfPartial, alphaPA, utiDict) for probOfPartial, utiDict in zip(probOfPartial_total[alphaAICase], baseUtilityDict[alphaAICase])] for alphaAICase in range(len(alphaAIList))]
+fullConstructedProb = getFullConstructedProb(getConstructedUtility, getActionProbabilityGivenAlpha, alphaAIList, alphaPA, probOfPartial_total, baseUtilityDict)
 
-fullConstructedProb = [[getActionProbabilityGivenAlpha (constUtility, beta) for constUtility in constructUtility[alphaAICase]] for alphaAICase in range(len(alphaAIList))]
-
-equalBonusConstructedProb = [[fullConstructedProb[alphaAICase][index]["Action3"] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-equalBonusConstructedProb_Summarized = [sum([sublist[i] for sublist in equalBonusConstructedProb]) / len(alphaAIList) for i in range(len(equalBonus))]
-
-fairBonusConstructedProb = [[fullConstructedProb[alphaAICase][index]["Action1"] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-fairBonusConstructedProb_Summarized = [sum([sublist[i] for sublist in fairBonusConstructedProb]) / len(alphaAIList) for i in range(len(equalBonus))]
+equalBonusConstructedProb = getConstructedProb_Action(fullConstructedProb, alphaAIList, "ActionEqual")
+equalBonusConstructedProb_Summarized = summarizeProb(equalBonusConstructedProb, alphaAIList, equalBonus)
 
 
-
-# In[14]:
-
+fairBonusConstructedProb = getConstructedProb_Action(fullConstructedProb, alphaAIList, "Action1")
+fairBonusConstructedProb_Summarized = summarizeProb(fairBonusConstructedProb, alphaAIList, equalBonus)
 
 plt.bar([str(bonus) for bonus in equalBonus], equalBonusConstructedProb_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Probability of Equal Bonus")
@@ -336,19 +291,12 @@ plt.ylim((0, 1))
 plt.show()
 
 
-# In[15]:
-
-
 plt.bar([str(bonus) for bonus in equalBonus], probOfPartial_equalBonus_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Partiality")
 plt.xlabel("Equal Bonus")
 plt.title("Equal Merit, Equal Bonus")
 plt.ylim((0, 1)) 
 plt.show()
-
-
-# In[16]:
-
 
 plt.bar([str(bonus) for bonus in equalBonus], probOfPartial_unequalBonus_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Partiality")
@@ -360,69 +308,47 @@ plt.show()
 
 # # Figure 3
 # ## Different Merit Condition: gamma1/ gamma2 = 4
-# 
-# 
-
-# In[17]:
-
 
 absoluteEffort = 1
-
-
-# In[18]:
-
-
 numberOfAgents = 2
 beta = 0.003
 alphaPartial = 6
 alphaPA = 1350
 judgePrior = 0.5
 
-effort = [4*absoluteEffort, absoluteEffort]
-
+effort = [4 * absoluteEffort, absoluteEffort]
 equalBonus = [0, 100, 500, 1000, 1100]
-probDicList = createProbDicList(1000, 100, equalBonus)
+probDicList = createProbDicList(1000, 100, equalBonus, numberOfAgents)
 
 getActionExpectedUtilityGivenWeight = [BaseDecisionMaker(probabDict, effort, beta, numberOfAgents) 
                                        for probabDict in probDicList]
 
-
-# In[19]:
-
-
-# base
 weightImpartial = [1, 1]
-baseUtilityDict = [[getUtilityFunc([weightImpartial, alphaAI]) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAI in alphaAIList]
+baseUtilityDict = getBaseUtilityDic(getActionExpectedUtilityGivenWeight, weightImpartial, alphaAIList)
+
 
 # partiality
 getJudgePartiality = [JudgePartiality (alphaPartial, numberOfAgents, alphaAI, beta, judgePrior) for alphaAI in alphaAIList]
-probOfPartial_total = [[getJudgePartiality[alphaAICase](getUtilityFunc) for getUtilityFunc in getActionExpectedUtilityGivenWeight] for alphaAICase in range(len(alphaAIList))] 
+probOfPartial_total = getProbOfPartial_total(getJudgePartiality, getActionExpectedUtilityGivenWeight, alphaAIList)
 
-probOfPartial_fairBonus = [[probOfPartial_total[alphaAICase][index]["Action1"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
-probOfPartial_unfairBonus = [[probOfPartial_total[alphaAICase][index]["Action2"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
-probOfPartial_equalBonus = [[probOfPartial_total[alphaAICase][index]["Action3"] for index in range(len(probOfPartial_total[alphaAICase]))]for alphaAICase in range(len(alphaAIList))]
+probOfPartial_fairBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "Action1")
+probOfPartial_unfairBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "Action2")
+probOfPartial_equalBonus = getProbOfPartial_Action(probOfPartial_total, alphaAIList, "ActionEqual")
 
-probOfPartial_fairBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_fairBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
-probOfPartial_unfairBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_unfairBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
-probOfPartial_equalBonus_Summarized = [sum([sublist[i] for sublist in probOfPartial_equalBonus]) / len(alphaAIList) for i in range(len(equalBonus))]
+probOfPartial_fairBonus_Summarized = summarizeProb(probOfPartial_fairBonus, alphaAIList, equalBonus)
+probOfPartial_unfairBonus_Summarized = summarizeProb(probOfPartial_unfairBonus, alphaAIList, equalBonus)
+probOfPartial_equalBonus_Summarized = summarizeProb(probOfPartial_equalBonus, alphaAIList, equalBonus)
 
 
 #constructed
-constructUtility = [[getConstructedUtility (alphaAIList[alphaAICase], probOfPartial, alphaPA, utiDict) for probOfPartial, utiDict in zip(probOfPartial_total[alphaAICase], baseUtilityDict[alphaAICase])] for alphaAICase in range(len(alphaAIList))]
+fullConstructedProb = getFullConstructedProb(getConstructedUtility, getActionProbabilityGivenAlpha, alphaAIList, alphaPA, probOfPartial_total, baseUtilityDict)
 
-fullConstructedProb = [[getActionProbabilityGivenAlpha (constUtility, beta) for constUtility in constructUtility[alphaAICase]] for alphaAICase in range(len(alphaAIList))]
-
-equalBonusConstructedProb = [[fullConstructedProb[alphaAICase][index]["Action3"] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-equalBonusConstructedProb_Summarized = [sum([sublist[i] for sublist in equalBonusConstructedProb]) / len(alphaAIList) for i in range(len(equalBonus))]
-
-fairBonusConstructedProb = [[fullConstructedProb[alphaAICase][index]["Action1"] for index in range(len(fullConstructedProb[alphaAICase]))] for alphaAICase in range(len(alphaAIList))]
-fairBonusConstructedProb_Summarized = [sum([sublist[i] for sublist in fairBonusConstructedProb]) / len(alphaAIList) for i in range(len(equalBonus))]
+equalBonusConstructedProb = getConstructedProb_Action(fullConstructedProb, alphaAIList, "ActionEqual")
+fairBonusConstructedProb = getConstructedProb_Action(fullConstructedProb, alphaAIList, "Action1")
 
 
-
-
-# In[20]:
-
+equalBonusConstructedProb_Summarized = summarizeProb(equalBonusConstructedProb, alphaAIList, equalBonus)
+fairBonusConstructedProb_Summarized = summarizeProb(fairBonusConstructedProb, alphaAIList, equalBonus)
 
 plt.bar([str(bonus) for bonus in equalBonus], equalBonusConstructedProb_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Probability of Equal Bonus")
@@ -434,9 +360,6 @@ plt.show()
 
 # ### Action 1: Fair Bonus
 
-# In[21]:
-
-
 plt.bar([str(bonus) for bonus in equalBonus], fairBonusConstructedProb_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Probability of Fair Bonus")
 plt.xlabel("Equal Bonus")
@@ -447,19 +370,12 @@ plt.show()
 
 # ## Partiality
 
-# In[22]:
-
-
 plt.bar([str(bonus) for bonus in equalBonus], probOfPartial_equalBonus_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Partiality")
 plt.xlabel("Equal Bonus")
 plt.title("Unequal Merit, Equal Bonus")
 plt.ylim((0, 1)) 
 plt.show()
-
-
-# In[23]:
-
 
 plt.bar([str(bonus) for bonus in equalBonus], probOfPartial_fairBonus_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Partiality")
@@ -468,16 +384,9 @@ plt.title("Unequal Merit, Fair Bonus")
 plt.ylim((0, 1)) 
 plt.show()
 
-
-# In[24]:
-
-
-# Action 2 is the unfair allocation
 plt.bar([str(bonus) for bonus in equalBonus], probOfPartial_unfairBonus_Summarized,color='blue',edgecolor='black')
 plt.ylabel("Partiality")
 plt.xlabel("Equal Bonus")
 plt.title("Unequal Merit, Unfair Bonus")
 plt.ylim((0, 1)) 
 plt.show()
-
-
