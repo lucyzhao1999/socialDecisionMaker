@@ -33,10 +33,9 @@ class GetJudgeProb:
         self.getBaseActionProb = getBaseActionProb
         self.getSingleJudgePartiality = getSingleJudgePartiality
 
-    def __call__(self, numberOfAgents, partialAgentNumber,
-                 rewardList, merit):
+    def __call__(self, numberOfAgents,rewardList, merit):
 
-        agentsWeightSet = self.getAgentsWeightSet(numberOfAgents, partialAgentNumber)
+        agentsWeightSet = self.getAgentsWeightSet(numberOfAgents)
         baseActionProbList = self.getBaseActionProb(rewardList, agentsWeightSet, self.alphaIAList, merit)
         judgeProb = [self.getSingleJudgePartiality(agentsWeightSet, baseActionProb) for baseActionProb in baseActionProbList]
         return judgeProb
@@ -102,13 +101,13 @@ class GetConstructedActionProb:
         self.getSingleJudgePartiality = getSingleJudgePartiality
         self.getAgentsWeightSet = getAgentsWeightSet
 
-    def __call__(self, numberOfAgents, partialAgentNumber, rewardList, alphaIAList, merit):
+    def __call__(self, numberOfAgents, rewardList, alphaIAList, merit):
 
         equalWeight = (1,) * numberOfAgents
         getSingleUtility = lambda reward, alphaIA: self.getBaseDecisionUtility(reward, [equalWeight, alphaIA], merit)
         baseUtility = [[getSingleUtility(reward, alphaIA) for alphaIA in alphaIAList] for reward in rewardList]
 
-        agentsWeightSet = self.getAgentsWeightSet(numberOfAgents, partialAgentNumber)
+        agentsWeightSet = self.getAgentsWeightSet(numberOfAgents)
 
         getSingleActionProb = lambda reward, weight, alphaIA: self.getActionProbabilityFromUtility(
             self.getBaseDecisionUtility(reward, [weight, alphaIA], merit))

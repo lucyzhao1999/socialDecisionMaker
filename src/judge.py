@@ -9,32 +9,34 @@ def getAgentsWeight(alphaPartial, numberOfAgents, partialAgentIndexList):
 
 
 
+# class GetAgentsWeightSet:
+#     def __init__(self, alphaPartial, getAgentsWeight):
+#         self.alphaPartial = alphaPartial
+#         self.getAgentsWeight = getAgentsWeight
+#
+#     def __call__(self, numberOfAgents, partialAgentNumber):
+#         agentsIndex = list(range(numberOfAgents))
+#         partialAgentIndex = list(combinations(agentsIndex, partialAgentNumber))
+#         agentsWeightSet = [self.getAgentsWeight(self.alphaPartial, numberOfAgents, partialList) for partialList in partialAgentIndex]
+#         agentsWeightSet.append((1,) * numberOfAgents)
+#         return agentsWeightSet
+
 class GetAgentsWeightSet:
     def __init__(self, alphaPartial, getAgentsWeight):
         self.alphaPartial = alphaPartial
         self.getAgentsWeight = getAgentsWeight
 
-    def __call__(self, numberOfAgents, partialAgentNumber):
-        agentsIndex = list(range(numberOfAgents))
-        partialAgentIndex = list(combinations(agentsIndex, partialAgentNumber))
-        agentsWeightSet = [self.getAgentsWeight(self.alphaPartial, numberOfAgents, partialList) for partialList in partialAgentIndex]
+    def __call__(self, numberOfAgents):
+        agentsWeightSetList = list()
+        for partialAgentNumber in range(1, numberOfAgents):
+            agentsIndex = list(range(numberOfAgents))
+            partialAgentIndex = list(combinations(agentsIndex, partialAgentNumber))
+            agentsWeightSetList.append(
+                [self.getAgentsWeight(self.alphaPartial, numberOfAgents, partialList) for partialList in
+                 partialAgentIndex])
+        agentsWeightSet = [weight for weightList in agentsWeightSetList for weight in weightList]
         agentsWeightSet.append((1,) * numberOfAgents)
         return agentsWeightSet
-
-
-
-class GetProbOfActionGivenAlpha:
-    def __init__(self, getBaseDecisionUtility, getActionProbabilityFromUtility):
-        self.getBaseDecisionUtility = getBaseDecisionUtility
-        self.getActionProbabilityFromUtility = getActionProbabilityFromUtility
-
-    def __call__(self, reward, agentsWeightSet, alphaIA, merit):
-        alphaVectorSet = [[agentWeight, alphaIA] for agentWeight in agentsWeightSet]
-        baseUtilityGivenAlpha = {alphaVector: self.getBaseDecisionUtility(reward, alphaVector, merit) for alphaVector in alphaVectorSet}
-
-        alphaVectorSetAndUtilityPair = zip(baseUtilityGivenAlpha.keys(), baseUtilityGivenAlpha.values())
-        baseActionProbGivenAlpha = {alphaVector[0]: self.getActionProbabilityFromUtility(baseUtility) for alphaVector, baseUtility in alphaVectorSetAndUtilityPair}
-        return baseActionProbGivenAlpha
 
 
 def getProbOfAlphaVectorGivenPartial(agentsWeightSet):
@@ -45,6 +47,7 @@ def getProbOfAlphaVectorGivenPartial(agentsWeightSet):
     impartialAgentsWeight = (1,) * numberOfAgents
     probOfAlphaGivenPartial[impartialAgentsWeight] = 0
     return probOfAlphaGivenPartial
+
 
 def getProbOfAlphaVectorGivenImpartial(agentsWeightSet):
     numberOfAgents = len(agentsWeightSet[0])
@@ -80,8 +83,6 @@ class GetSingleJudgePartiality:
         self.priorOfImpartiality = 1-priorOfPartiality
 
     def __call__(self, agentsWeightSet, baseActionProbGivenAlpha):
-
-        # baseActionProbGivenAlpha = self.getProbOfActionGivenAlpha(reward, agentsWeightSet, alphaIA, merit)
 
         probOfAlphaGivenPartial = self.getProbOfAlphaVectorGivenPartial(agentsWeightSet)
         jointPartialProbGivenAction = getJointProbOfPartialAndAlphaGivenAction(baseActionProbGivenAlpha, probOfAlphaGivenPartial, self.priorOfPartiality)

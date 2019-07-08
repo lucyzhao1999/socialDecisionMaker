@@ -6,14 +6,12 @@ from visualization.plotResults import *
 
 def main():
 
-# equal merit condition
-    merit = [1, 1]
+    merit = [1, 1, 1]
     highBonus = 1000
     lowBonus = 100
-    equalBonusList = [0, 100, 500, 1000, 1100]
-
+    equalBonusList = np.linspace(0, 1200, 50)
     highBonusAgentCount = 1
-    lowBonusAgentCount = 1
+    lowBonusAgentCount = 2
     totalAgentsCount = highBonusAgentCount + lowBonusAgentCount
 
     createReward = CreateReward(createPartialAllocationList)
@@ -63,11 +61,12 @@ def main():
 
     constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
 
+
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]
 
-    barPlotBonusActionProb(equalBonusList, constructedEqualBonusProb, 'Probability of Equal Bonus', 'Equal Merit, Equal Bonus')
-    barplotPartiality(equalBonusList, partialityEqualBonus, 'Equal Merit, Equal Bonus')
-    barplotPartiality(equalBonusList, partialityUnequalBonus, 'Equal Merit, Unqual Bonus')
+
+    plotEqualBonusPartiality(equalBonusList, partialityUnequalBonus, partialityEqualBonus)
+    plotEqualBonusActionProb(equalBonusList, baseEqualBonusProb, constructedEqualBonusProb)
 
 
 

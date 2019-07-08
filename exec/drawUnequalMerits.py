@@ -48,8 +48,7 @@ def main():
         priorOfPartiality
     )
     getJudgeProb = GetJudgeProb(alphaIAList, getAgentsWeightSet, getBaseActionProb, getSingleJudgePartiality)
-    partialAgentNumber = 1
-    judgeProbList = getJudgeProb(totalAgentsCount,partialAgentNumber, rewardList,merit)
+    judgeProbList = getJudgeProb(totalAgentsCount, rewardList, merit)
 
     partialityFairBonus = [judgeProb['Action1'] for judgeProb in judgeProbList]
     partialityEqualBonus = [judgeProb['ActionEqual'] for judgeProb in judgeProbList]
@@ -62,7 +61,7 @@ def main():
 
     getConstructedActionProb = GetConstructedActionProb(getBaseDecisionUtility, getSingleConstructedActionProb, getActionProbabilityFromUtility, getSingleJudgePartiality,getAgentsWeightSet)
 
-    constructedActionProbList = getConstructedActionProb(totalAgentsCount, partialAgentNumber, rewardList, alphaIAList, merit)
+    constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
 
 
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]

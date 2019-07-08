@@ -22,7 +22,7 @@ class TestSocialDecisionMaker(unittest.TestCase):
         self.getUtilityOfInequity = targetcode.GetUtilityOfInequity(targetcode.getInequity)
         self.getBaseDecisionUtility = targetcode.GetBaseDecisionUtility(targetcode.getUtilityOfEfficiency, self.getUtilityOfInequity)
 
-        self.getActionProbabilityGivenAlpha = GetActionProbabilityFromUtility(self.beta)
+        self.getActionProbabilityGivenAlpha = targetcode.GetActionProbabilityFromUtility(self.beta)
 
 
 
@@ -110,7 +110,7 @@ class TestSocialDecisionMaker(unittest.TestCase):
     def testInequity(self, reward, merit, alphaIA, trueUtilityOfInequity):
         getUtilityOfInequity = targetcode.GetUtilityOfInequity(targetcode.getInequity)
         utilityOfInequity = getUtilityOfInequity(reward, merit, alphaIA)
-        self.assertEqual(utilityOfInequity, trueUtilityOfInequity)
+        self.assertEqual(trueUtilityOfInequity, utilityOfInequity)
 
 
     @data(({'Action1': [800, 200, 200],
@@ -121,11 +121,17 @@ class TestSocialDecisionMaker(unittest.TestCase):
           {'Action1': 1000,
            'Action2': -1400,
            'Action3': 200}
-          ))
+          ),(
+            {'Action1': [200, 100, 100],'Action2': [100, 200, 100],'Action3': [100, 100, 200]},
+            [[1, -1, 1], 0.5],
+            [1, 1, 1],
+            {'Action1': 100, 'Action2': -100, 'Action3': 100}
+    )
+          )
     @unpack
     def testBaseUtility(self, reward, alphaVector, merit, trueBaseUtility):
         baseUtility = self.getBaseDecisionUtility(reward, alphaVector, merit)
-        self.assertEqual(baseUtility, trueBaseUtility)
+        self.assertEqual(trueBaseUtility, baseUtility)
 
 
     def testActionProb(self):
