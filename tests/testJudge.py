@@ -1,7 +1,13 @@
+import sys
+import os
+sys.path.append(os.path.join('..', 'src'))
+
 import unittest
 from ddt import ddt, data, unpack
-from src import judge as targetcode
-from src.baseDecisionMaker import *
+from baseDecisionMaker import getUtilityOfEfficiency, getInequity, \
+    GetUtilityOfInequity, GetBaseDecisionUtility, GetActionProbabilityFromUtility
+import judge as targetcode
+
 
 
 @ddt

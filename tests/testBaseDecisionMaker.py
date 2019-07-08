@@ -1,5 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.join('..', 'src'))
+
+import baseDecisionMaker as targetcode
 import unittest
-from src import baseDecisionMaker as targetcode
 from ddt import ddt, data, unpack
 
 @ddt
@@ -7,14 +11,12 @@ class TestSocialDecisionMaker(unittest.TestCase):
 
     def setUp(self):
         self.lambdaInput = 0.7
-        # alphaAIList = [np.random.exponential(lambdaInput) for i in range(100)] # draw 1000 samples from exponential distribution
         self.alphaAIList = [0.7]
         self.absoluteEffort = 1
         self.beta = 0.003
         self.alphaPartial = 6
         self.alphaPA = 1350
         self.judgePrior = 0.5
-        # self.equalBonusList = np.linspace(0, 1200, 50)
 
         self.alphaIA = 0.7
         self.createReward = targetcode.CreateReward(targetcode.createPartialAllocationList)

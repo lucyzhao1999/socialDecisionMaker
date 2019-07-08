@@ -1,8 +1,20 @@
-from src.baseDecisionMaker import *
-from src.judge import *
-from src.wrappers import *
-from src.constructedSocialDecisionMaker import *
-from visualization.plotResults import *
+import sys
+import os
+sys.path.append(os.path.join('..', 'src'))
+sys.path.append(os.path.join('..', 'visualization'))
+
+from baseDecisionMaker import createPartialAllocationList, CreateReward, \
+    getUtilityOfEfficiency, getInequity, GetUtilityOfInequity, GetBaseDecisionUtility, \
+    GetActionProbabilityFromUtility
+from judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
+    getProbOfAlphaVectorGivenImpartial, getJointProbOfPartialAndAlphaGivenAction, \
+    GetSingleJudgePartiality
+from constructedSocialDecisionMaker import GetSingleConstructedActionProb
+
+from wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
+from plotResults import barPlotBonusActionProb, barplotPartiality
+
+import numpy as np
 
 def main():
 
@@ -60,7 +72,6 @@ def main():
     getSingleConstructedActionProb = GetSingleConstructedActionProb(alphaPA, getActionProbabilityFromUtility)
 
     getConstructedActionProb = GetConstructedActionProb(getBaseDecisionUtility, getSingleConstructedActionProb, getActionProbabilityFromUtility, getSingleJudgePartiality,getAgentsWeightSet)
-
     constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
 
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]
