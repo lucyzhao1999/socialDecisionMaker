@@ -3,16 +3,16 @@ import os
 sys.path.append(os.path.join('..', 'src'))
 sys.path.append(os.path.join('..', 'visualization'))
 
-from baseDecisionMaker import createPartialAllocationList, CreateReward, \
+from resourceAllocationFairness.baseDecisionMaker import createPartialAllocationList, CreateReward, \
     getUtilityOfEfficiency, getInequity, GetUtilityOfInequity, GetBaseDecisionUtility, \
     GetActionProbabilityFromUtility
-from judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
+from resourceAllocationFairness.judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
     getProbOfAlphaVectorGivenImpartial, getJointProbOfPartialAndAlphaGivenAction, \
     GetSingleJudgePartiality
-from constructedSocialDecisionMaker import GetSingleConstructedActionProb
+from resourceAllocationFairness.constructedSocialDecisionMaker import GetSingleConstructedActionProb
 
-from wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
-from plotResults import plotEqualBonusPartiality, plotEqualBonusActionProb
+from resourceAllocationFairness.wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
+from resourceAllocVisualization import plotEqualBonusPartiality, plotEqualBonusActionProb
 
 import numpy as np
 

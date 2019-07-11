@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import os
 
 def plotEqualBonusPartiality(equalBonus, partialProbForUnequalBonus, partialProbForEqualBonus):
     plt.plot(equalBonus, partialProbForUnequalBonus, color='grey', label='Unequal Allocation')
@@ -8,6 +8,7 @@ def plotEqualBonusPartiality(equalBonus, partialProbForUnequalBonus, partialProb
     plt.ylabel("Partiality")
     plt.xlabel("Equal Bonus")
     plt.ylim(-0.1, 1.1)
+    plt.savefig(os.path.join('equalBonusPartiality'))
     plt.show()
 
 
@@ -18,6 +19,7 @@ def plotEqualBonusActionProb(equalBonusList, actionProbForBaseDM, actionProbForC
     plt.ylabel("Probability of Equal Bonus")
     plt.xlabel("Equal Bonus")
     plt.ylim(0, 1.1)
+    plt.savefig(os.path.join('equalBonusActionProbComparison'))
     plt.show()
 
 
@@ -27,6 +29,7 @@ def barPlotBonusActionProb(equalBonusList, actionProb, yLabel, plotTitle):
     plt.xlabel("Equal Bonus")
     plt.title(plotTitle)
     plt.ylim((0, 1))
+    plt.savefig(os.path.join(plotTitle))
     plt.show()
 
 
@@ -36,4 +39,5 @@ def barplotPartiality(equalBonusList, partiality, plotTitle):
     plt.xlabel("Equal Bonus")
     plt.title(plotTitle)
     plt.ylim((0, 1))
+    plt.savefig(os.path.join(plotTitle))
     plt.show()

@@ -3,16 +3,16 @@ import os
 sys.path.append(os.path.join('..', 'src'))
 sys.path.append(os.path.join('..', 'visualization'))
 
-from baseDecisionMaker import createPartialAllocationList, CreateReward, \
+from resourceAllocationFairness.baseDecisionMaker import createPartialAllocationList, CreateReward, \
     getUtilityOfEfficiency, getInequity, GetUtilityOfInequity, GetBaseDecisionUtility, \
     GetActionProbabilityFromUtility
-from judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
+from resourceAllocationFairness.judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
     getProbOfAlphaVectorGivenImpartial, getJointProbOfPartialAndAlphaGivenAction, \
     GetSingleJudgePartiality
-from constructedSocialDecisionMaker import GetSingleConstructedActionProb
+from resourceAllocationFairness.constructedSocialDecisionMaker import GetSingleConstructedActionProb
 
-from wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
-from plotResults import barPlotBonusActionProb, barplotPartiality
+from resourceAllocationFairness.wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
+from resourceAllocVisualization import barPlotBonusActionProb, barplotPartiality
 
 import numpy as np
 
@@ -77,12 +77,12 @@ def main():
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]
     constructedFairBonusProb = [constructedActionProb['Action1'] for constructedActionProb in constructedActionProbList]
 
-    barPlotBonusActionProb(equalBonusList, constructedEqualBonusProb, 'Probability of Equal Bonus', 'Unequal Merit, Equal Bonus')
-    barPlotBonusActionProb(equalBonusList, constructedFairBonusProb, 'Probability of Fair Bonus', 'Unequal Merit, Fair Bonus')
+    barPlotBonusActionProb(equalBonusList, constructedEqualBonusProb, 'Probability of Equal Bonus', 'Unequal Merit, Equal Bonus, ActionProb')
+    barPlotBonusActionProb(equalBonusList, constructedFairBonusProb, 'Probability of Fair Bonus', 'Unequal Merit, Fair Bonus, ActionProb')
 
-    barplotPartiality(equalBonusList, partialityEqualBonus, "Unequal Merit, Equal Bonus")
-    barplotPartiality(equalBonusList, partialityFairBonus, "Unequal Merit, Fair Bonus")
-    barplotPartiality(equalBonusList, partialityUnfairBonus, "Unequal Merit, Unfair Bonus")
+    barplotPartiality(equalBonusList, partialityEqualBonus, "Unequal Merit, Equal Bonus, Partiality")
+    barplotPartiality(equalBonusList, partialityFairBonus, "Unequal Merit, Fair Bonus, Partiality")
+    barplotPartiality(equalBonusList, partialityUnfairBonus, "Unequal Merit, Unfair Bonus, Partiality")
 
 if __name__ == '__main__':
     main()

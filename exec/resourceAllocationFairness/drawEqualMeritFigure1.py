@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.join('..', 'src'))
+sys.path.append(os.path.join('..', 'src','resourceAllocationFairness'))
 sys.path.append(os.path.join('..', 'visualization'))
 
 from baseDecisionMaker import createPartialAllocationList, CreateReward, \
@@ -12,7 +12,7 @@ from judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGiven
 from constructedSocialDecisionMaker import GetSingleConstructedActionProb
 
 from wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
-from plotResults import barPlotBonusActionProb, barplotPartiality
+from resourceAllocVisualization import plotEqualBonusPartiality, plotEqualBonusActionProb
 
 import numpy as np
 
@@ -22,8 +22,7 @@ def main():
     merit = [1, 1]
     highBonus = 1000
     lowBonus = 100
-    equalBonusList = [0, 100, 500, 1000, 1100]
-
+    equalBonusList = np.linspace(0, 1200, 50)
     highBonusAgentCount = 1
     lowBonusAgentCount = 1
     totalAgentsCount = highBonusAgentCount + lowBonusAgentCount
@@ -70,15 +69,14 @@ def main():
 #third layer
     alphaPA = 1350
     getSingleConstructedActionProb = GetSingleConstructedActionProb(alphaPA, getActionProbabilityFromUtility)
-
     getConstructedActionProb = GetConstructedActionProb(getBaseDecisionUtility, getSingleConstructedActionProb, getActionProbabilityFromUtility, getSingleJudgePartiality,getAgentsWeightSet)
-    constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
 
+    constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]
 
-    barPlotBonusActionProb(equalBonusList, constructedEqualBonusProb, 'Probability of Equal Bonus', 'Equal Merit, Equal Bonus')
-    barplotPartiality(equalBonusList, partialityEqualBonus, 'Equal Merit, Equal Bonus')
-    barplotPartiality(equalBonusList, partialityUnequalBonus, 'Equal Merit, Unqual Bonus')
+
+    plotEqualBonusPartiality(equalBonusList, partialityUnequalBonus, partialityEqualBonus)
+    plotEqualBonusActionProb(equalBonusList, baseEqualBonusProb, constructedEqualBonusProb)
 
 
 

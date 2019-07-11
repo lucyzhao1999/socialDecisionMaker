@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d549514e-2979-4a1f-aa88-d52de7052df7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/socialDecisionMaker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/socialDecisionMaker.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exec/drawMultiAgentAllocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/drawMultiAgentAllocation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exec/drawUnequalMerits.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/drawUnequalMerits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exec/drawMultiAgentAllocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/resourceAllocationFairness/drawMultiAgentAllocation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exec/drawUnequalMerits.py" beforeDir="false" afterPath="$PROJECT_DIR$/exec/resourceAllocationFairness/drawUnequalMerits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseDecisionMaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/resourceAllocationFairness/baseDecisionMaker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constructedSocialDecisionMaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/resourceAllocationFairness/constructedSocialDecisionMaker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/judge.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/resourceAllocationFairness/judge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wrappers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/resourceAllocationFairness/wrappers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testBaseDecisionMaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testBaseDecisionMaker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/testJudge.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/testJudge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization/plotResults.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization/resourceAllocVisualization.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,10 +25,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exec/drawEqualMeritFigure1.py">
+        <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="70" column="109" selection-start-line="70" selection-start-column="109" selection-end-line="70" selection-end-column="109" />
+            <state>
+              <caret selection-end-line="4" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -31,10 +37,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exec/drawEqualMeritFigure2.py">
+        <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="73" column="189" selection-start-line="73" selection-start-column="189" selection-end-line="73" selection-end-column="189" />
+            <state relative-caret-position="406">
+              <caret line="83" selection-start-line="83" selection-end-line="87" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -43,22 +49,82 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exec/drawMultiAgentAllocation.py">
+        <entry file="file://$PROJECT_DIR$/exec/helpingFairness.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1480">
-              <caret line="74" column="125" selection-start-line="74" selection-start-column="125" selection-end-line="74" selection-end-column="125" />
+            <state relative-caret-position="200">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helpingFairness/cardGameExample.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helpingFairness/reputationChange.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helpingFairness/constructedUtility.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/exec/drawUnequalMerits.py">
+        <entry file="file://$PROJECT_DIR$/src/helpingFairness/baseUtility.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="120">
+              <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/visualization/resourceAllocVisualization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawMultiAgentAllocation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawUnequalMerits.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1460">
+              <caret line="73" column="19" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -123,15 +189,20 @@
         <option value="$PROJECT_DIR$/exec/drawEqualMerit.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_20.py" />
         <option value="$PROJECT_DIR$/src/constructedSocialDecisionMaker.py" />
-        <option value="$PROJECT_DIR$/visualization/plotResults.py" />
         <option value="$PROJECT_DIR$/src/wrappers.py" />
         <option value="$PROJECT_DIR$/src/judge.py" />
         <option value="$PROJECT_DIR$/tests/testJudge.py" />
         <option value="$PROJECT_DIR$/tests/testBaseDecisionMaker.py" />
-        <option value="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" />
-        <option value="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" />
         <option value="$PROJECT_DIR$/exec/drawMultiAgentAllocation.py" />
+        <option value="$PROJECT_DIR$/visualization/plotResults.py" />
+        <option value="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" />
         <option value="$PROJECT_DIR$/exec/drawUnequalMerits.py" />
+        <option value="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" />
+        <option value="$PROJECT_DIR$/src/helpingFairness/cardGameExample.py" />
+        <option value="$PROJECT_DIR$/src/helpingFairness/constructedUtility.py" />
+        <option value="$PROJECT_DIR$/src/helpingFairness/baseUtility.py" />
+        <option value="$PROJECT_DIR$/src/helpingFairness/reputationChange.py" />
+        <option value="$PROJECT_DIR$/exec/helpingFairness.py" />
       </list>
     </option>
   </component>
@@ -147,7 +218,9 @@
     <option name="width" value="714" />
     <option name="height" value="900" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -169,6 +242,12 @@
               <item name="socialDecisionMaker" type="b2602c69:ProjectViewProjectNode" />
               <item name="socialDecisionMaker" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="socialDecisionMaker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="socialDecisionMaker" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="helpingFairness" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="socialDecisionMaker" type="b2602c69:ProjectViewProjectNode" />
@@ -217,11 +296,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/exec/resourceAllocationFairness" />
+      <recent name="$PROJECT_DIR$/src/resourceAllocationFairness" />
       <recent name="$PROJECT_DIR$/visualization" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$/exec" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -236,7 +315,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in testBaseDecisionMaker.py">
+  <component name="RunManager" selected="Python.helpingFairness">
     <configuration name="drawEqualMeritFigure1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="socialDecisionMaker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -250,7 +329,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/drawEqualMeritFigure1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -272,7 +351,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/drawEqualMeritFigure2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -294,7 +373,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/drawMultiAgentAllocation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/resourceAllocationFairness/drawMultiAgentAllocation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -316,7 +395,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/drawUnequalMerits.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/resourceAllocationFairness/drawUnequalMerits.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="helpingFairness" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="socialDecisionMaker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/exec" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exec/helpingFairness.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -338,7 +439,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/baseDecisionMaker.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/resourceAllocationFairness/baseDecisionMaker.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -362,32 +463,17 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in testBaseDecisionMaker.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="socialDecisionMaker" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/testBaseDecisionMaker.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.socialDecisionMaker" />
       <item itemvalue="Python.drawMultiAgentAllocation" />
       <item itemvalue="Python.drawEqualMeritFigure1" />
       <item itemvalue="Python.drawEqualMeritFigure2" />
       <item itemvalue="Python.drawUnequalMerits" />
-      <item itemvalue="Python tests.Unittests in testBaseDecisionMaker.py" />
+      <item itemvalue="Python.helpingFairness" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in testBaseDecisionMaker.py" />
+        <item itemvalue="Python.helpingFairness" />
         <item itemvalue="Python.drawMultiAgentAllocation" />
         <item itemvalue="Python.drawUnequalMerits" />
         <item itemvalue="Python.drawEqualMeritFigure2" />
@@ -406,14 +492,11 @@
       <option name="presentableId" value="Default" />
       <updated>1560880543456</updated>
       <workItem from="1560880549696" duration="43608000" />
-      <workItem from="1561775690256" duration="27133000" />
+      <workItem from="1561775690256" duration="29723000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_testJudge_py - 2019.06.30 at 19h 33m 54s.xml">
-      <configuration name="Unittests in testJudge.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_testJudge_py - 2019.07.02 at 09h 16m 59s.xml">
       <configuration name="Unittests in testJudge.py" configurationId="tests" />
     </history-entry>
@@ -441,20 +524,23 @@
     <history-entry file="Unittests_in_testBaseDecisionMaker_py - 2019.07.08 at 14h 30m 23s.xml">
       <configuration name="Unittests in testBaseDecisionMaker.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_testBaseDecisionMaker_py - 2019.07.11 at 09h 57m 14s.xml">
+      <configuration name="Unittests in testBaseDecisionMaker.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70741000" />
+    <option name="totallyTimeSpent" value="73331000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16570605" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12896253" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.18495685" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27990136" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -468,7 +554,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.17291066" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.08357349" />
       <window_info anchor="right" id="R Graphics" order="4" />
       <window_info anchor="right" id="R Packages" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -503,17 +589,18 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawUnequalMerits.coverage" NAME="drawUnequalMerits Coverage Results" MODIFIED="1562087270409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawUnequalMerits.coverage" NAME="drawUnequalMerits Coverage Results" MODIFIED="1562864668480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$helpingFairness.coverage" NAME="helpingFairness Coverage Results" MODIFIED="1562865973755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_for_unittestForSocialDecisonMaker_TestSocialDecisionMaker.coverage" NAME="Unittests for unittestForSocialDecisonMaker.TestSocialDecisionMaker Coverage Results" MODIFIED="1560974517632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawEqualMeritFigure2.coverage" NAME="drawEqualMeritFigure2 Coverage Results" MODIFIED="1562087251569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawEqualMeritFigure2.coverage" NAME="drawEqualMeritFigure2 Coverage Results" MODIFIED="1562864662585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_for_testBaseDecisionMaker_TestSocialDecisionMaker.coverage" NAME="Unittests for testBaseDecisionMaker.TestSocialDecisionMaker Coverage Results" MODIFIED="1561946659507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_for_testJudge_testJudge.coverage" NAME="Unittests for testJudge.testJudge Coverage Results" MODIFIED="1561948366284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$socialDecisionMaker.coverage" NAME="socialDecisionMaker Coverage Results" MODIFIED="1561144980935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawEqualMeritFigure1.coverage" NAME="drawEqualMeritFigure1 Coverage Results" MODIFIED="1562087168260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawEqualMeritFigure1.coverage" NAME="drawEqualMeritFigure1 Coverage Results" MODIFIED="1562864237812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_in_testJudge_py.coverage" NAME="Unittests in testJudge.py Coverage Results" MODIFIED="1562087042557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_in_testBaseDecisionMaker_py.coverage" NAME="Unittests in testBaseDecisionMaker.py Coverage Results" MODIFIED="1562621422804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_in_testBaseDecisionMaker_py.coverage" NAME="Unittests in testBaseDecisionMaker.py Coverage Results" MODIFIED="1562864232752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_in_unittestForSocialDecisonMaker_py.coverage" NAME="Unittests in unittestForSocialDecisonMaker.py Coverage Results" MODIFIED="1561525598310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawMultiAgentAllocation.coverage" NAME="drawMultiAgentAllocation Coverage Results" MODIFIED="1562620706717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
+    <SUITE FILE_PATH="coverage/socialDecisionMaker$drawMultiAgentAllocation.coverage" NAME="drawMultiAgentAllocation Coverage Results" MODIFIED="1562864743010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exec" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$Unittests_for_unittestForSocialDecisonMaker_TestSocialDecisionMaker_testAllocationList.coverage" NAME="Unittests for unittestForSocialDecisonMaker.TestSocialDecisionMaker.testAllocationList Coverage Results" MODIFIED="1560890574058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/socialDecisionMaker$main.coverage" NAME="main Coverage Results" MODIFIED="1561938798280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -544,34 +631,14 @@
     <entry file="file://$PROJECT_DIR$/src/f">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/testJudge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="81" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="7" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/testBaseDecisionMaker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/judge.py">
+    <entry file="file://$PROJECT_DIR$/src/resourceAllocationFairness/judge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wrappers.py">
+    <entry file="file://$PROJECT_DIR$/src/resourceAllocationFairness/wrappers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1880">
           <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
@@ -581,14 +648,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constructedSocialDecisionMaker.py">
+    <entry file="file://$PROJECT_DIR$/src/resourceAllocationFairness/constructedSocialDecisionMaker.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="36" selection-start-column="6" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/baseDecisionMaker.py">
+    <entry file="file://$PROJECT_DIR$/src/resourceAllocationFairness/baseDecisionMaker.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="28" column="26" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="26" />
@@ -598,50 +665,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exec/drawEqualMeritFigure1.py">
+    <entry file="file://$PROJECT_DIR$/tests/testJudge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="70" column="109" selection-start-line="70" selection-start-column="109" selection-end-line="70" selection-end-column="109" />
+        <state relative-caret-position="326">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/visualization/plotResults.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/exec/Equal Merit, Unqual Bonus.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/exec/drawEqualMeritFigure2.py">
+    <entry file="file://$PROJECT_DIR$/exec/equalBonusPartiality.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exec/equalBonusActionProbComparison.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/testBaseDecisionMaker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="73" column="189" selection-start-line="73" selection-start-column="189" selection-end-line="73" selection-end-column="189" />
+        <state relative-caret-position="140">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exec/drawMultiAgentAllocation.py">
+    <entry file="file://$PROJECT_DIR$/visualization/resourceAllocVisualization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1480">
-          <caret line="74" column="125" selection-start-line="74" selection-start-column="125" selection-end-line="74" selection-end-column="125" />
+        <state relative-caret-position="180">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawMultiAgentAllocation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exec/drawUnequalMerits.py">
+    <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawUnequalMerits.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="1460">
+          <caret line="73" column="19" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exec/resourceAllocationFairness/drawEqualMeritFigure2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="83" selection-start-line="83" selection-end-line="87" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exec/helpingFairness.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpingFairness/cardGameExample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpingFairness/reputationChange.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpingFairness/constructedUtility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpingFairness/baseUtility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
         </state>
       </provider>
     </entry>

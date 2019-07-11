@@ -4,10 +4,9 @@ sys.path.append(os.path.join('..', 'src'))
 
 import unittest
 from ddt import ddt, data, unpack
-from baseDecisionMaker import getUtilityOfEfficiency, getInequity, \
+from resourceAllocationFairness.baseDecisionMaker import getUtilityOfEfficiency, getInequity, \
     GetUtilityOfInequity, GetBaseDecisionUtility, GetActionProbabilityFromUtility
-import judge as targetcode
-
+from resourceAllocationFairness import judge as targetcode
 
 
 @ddt

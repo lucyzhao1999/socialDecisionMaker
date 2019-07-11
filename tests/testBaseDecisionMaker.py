@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.join('..', 'src'))
 
-import baseDecisionMaker as targetcode
+from resourceAllocationFairness import baseDecisionMaker as targetcode
 import unittest
 from ddt import ddt, data, unpack
 

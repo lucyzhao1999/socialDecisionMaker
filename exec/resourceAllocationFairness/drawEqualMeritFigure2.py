@@ -3,16 +3,16 @@ import os
 sys.path.append(os.path.join('..', 'src'))
 sys.path.append(os.path.join('..', 'visualization'))
 
-from baseDecisionMaker import createPartialAllocationList, CreateReward, \
+from resourceAllocationFairness.baseDecisionMaker import createPartialAllocationList, CreateReward, \
     getUtilityOfEfficiency, getInequity, GetUtilityOfInequity, GetBaseDecisionUtility, \
     GetActionProbabilityFromUtility
-from judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
+from resourceAllocationFairness.judge import getAgentsWeight, GetAgentsWeightSet, getProbOfAlphaVectorGivenPartial,\
     getProbOfAlphaVectorGivenImpartial, getJointProbOfPartialAndAlphaGivenAction, \
     GetSingleJudgePartiality
-from constructedSocialDecisionMaker import GetSingleConstructedActionProb
+from resourceAllocationFairness.constructedSocialDecisionMaker import GetSingleConstructedActionProb
 
-from wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
-from plotResults import plotEqualBonusPartiality, plotEqualBonusActionProb
+from resourceAllocationFairness.wrappers import GetBaseActionProb, GetJudgeProb, GetConstructedActionProb
+from resourceAllocVisualization import barPlotBonusActionProb, barplotPartiality
 
 import numpy as np
 
@@ -22,7 +22,8 @@ def main():
     merit = [1, 1]
     highBonus = 1000
     lowBonus = 100
-    equalBonusList = np.linspace(0, 1200, 50)
+    equalBonusList = [0, 100, 500, 1000, 1100]
+
     highBonusAgentCount = 1
     lowBonusAgentCount = 1
     totalAgentsCount = highBonusAgentCount + lowBonusAgentCount
@@ -69,14 +70,15 @@ def main():
 #third layer
     alphaPA = 1350
     getSingleConstructedActionProb = GetSingleConstructedActionProb(alphaPA, getActionProbabilityFromUtility)
-    getConstructedActionProb = GetConstructedActionProb(getBaseDecisionUtility, getSingleConstructedActionProb, getActionProbabilityFromUtility, getSingleJudgePartiality,getAgentsWeightSet)
 
+    getConstructedActionProb = GetConstructedActionProb(getBaseDecisionUtility, getSingleConstructedActionProb, getActionProbabilityFromUtility, getSingleJudgePartiality,getAgentsWeightSet)
     constructedActionProbList = getConstructedActionProb(totalAgentsCount, rewardList, alphaIAList, merit)
+
     constructedEqualBonusProb = [constructedActionProb['ActionEqual'] for constructedActionProb in constructedActionProbList]
 
-
-    plotEqualBonusPartiality(equalBonusList, partialityUnequalBonus, partialityEqualBonus)
-    plotEqualBonusActionProb(equalBonusList, baseEqualBonusProb, constructedEqualBonusProb)
+    barPlotBonusActionProb(equalBonusList, constructedEqualBonusProb, 'Probability of Equal Bonus', 'Equal Merit, Equal Bonus, ActionProb')
+    barplotPartiality(equalBonusList, partialityEqualBonus, 'Equal Merit, Equal Bonus, Partiality')
+    barplotPartiality(equalBonusList, partialityUnequalBonus, 'Equal Merit, Unqual Bonus, Partiality')
 
 
 
