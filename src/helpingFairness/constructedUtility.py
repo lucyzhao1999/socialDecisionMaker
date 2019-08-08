@@ -25,6 +25,9 @@ class GetConstructedHelpingProb:
         self.getConstructedUtility = getConstructedUtility
 
     def __call__(self, agentAbilityScore, helpingCost):
+        if agentAbilityScore < helpingCost:
+            return 0
+
         helpedUtility = self.getConstructedUtility(agentAbilityScore, helpingCost, helped=True)
         helpProb = math.exp(helpedUtility * self.beta)
 

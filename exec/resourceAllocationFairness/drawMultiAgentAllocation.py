@@ -1,7 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.join('..', 'src'))
-sys.path.append(os.path.join('..', 'visualization'))
+sys.path.append(os.path.join('..','..', 'src'))
+sys.path.append(os.path.join('..', '..','visualization'))
 
 from resourceAllocationFairness.baseDecisionMaker import createPartialAllocationList, CreateReward, \
     getUtilityOfEfficiency, getInequity, GetUtilityOfInequity, GetBaseDecisionUtility, \

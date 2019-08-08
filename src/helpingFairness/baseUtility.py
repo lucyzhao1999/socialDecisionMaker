@@ -26,12 +26,15 @@ class GetBaseHelpingProb:
         self.beta = beta
         self.getBaseUtility = getBaseUtility
 
-    def __call__(self, helpingCost):
+    def __call__(self, ability, helpingCost):
+        if ability < helpingCost:
+            return 0
+
         helpedUtility = self.getBaseUtility(helpingCost, helped=True)
         helpProb = math.exp(helpedUtility * self.beta)
 
         noHelpUtility = self.getBaseUtility(helpingCost, helped=False)
-        noHelpProb = math.exp(noHelpUtility * self.beta)
+        noHelpProb = math.exp(noHelpUtility * self.beta) # always = 1
 
         helpProbNormalized = helpProb / (helpProb + noHelpProb)
         return helpProbNormalized

@@ -10,16 +10,16 @@
 '''
 
 class GetReputationChange:
-    def __init__(self, reputBoostIndex, reputHurtIndex):
-        self.reputBoostIndex = reputBoostIndex  # positive
-        self.reputHurtIndex = reputHurtIndex  # negative
+    def __init__(self, reputBoostParam, reputHurtParam):
+        self.reputBoostParam = reputBoostParam  # positive
+        self.reputHurtParam = reputHurtParam  # negative
 
     def __call__(self, agentAbilityScore, helpingCost, helped):
-        costIndex = helpingCost / agentAbilityScore
+        costAbilityRatio = helpingCost / agentAbilityScore
         if helped:
-            reputationChange = self.reputBoostIndex * costIndex
+            reputationChange = self.reputBoostParam * costAbilityRatio
         else:
-            reputationChange = self.reputHurtIndex * (1 - costIndex)
+            reputationChange = self.reputHurtParam * (1 - costAbilityRatio)
 
         print("helped", helped, "reputationChange", reputationChange)
         return reputationChange
