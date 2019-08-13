@@ -65,7 +65,7 @@ def main():
     plt.xlabel("ability score")
     plt.ylim(-0.1, 1.1)
     plt.show()
-    
+
 ##############################################################
     helpingReward = 0
     getBaseUtility = GetBaseUtility(helpingReward)
