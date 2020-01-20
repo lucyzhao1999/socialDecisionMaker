@@ -19,7 +19,7 @@ class GetReputationChange:
         if helped:
             reputationChange = self.reputBoostParam * costAbilityRatio
         else:
-            reputationChange = self.reputHurtParam * (1 - costAbilityRatio)
+            reputationChange = self.reputHurtParam * max(0, (1 - costAbilityRatio))
 
         print("helped", helped, "reputationChange", reputationChange)
         return reputationChange
